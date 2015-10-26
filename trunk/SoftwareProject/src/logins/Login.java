@@ -1,6 +1,6 @@
 package logins;
 
-public class Login {
+public class Login  {
 	public Login(int id, String bedrijfsnaam, String paswoord, String hashcode) {
 		super();
 		this.id = id;
@@ -10,6 +10,7 @@ public class Login {
 	}
 	private int id;
 	private String bedrijfsnaam, paswoord, hashcode;
+	
 	public int getId() {
 		return id;
 	}
