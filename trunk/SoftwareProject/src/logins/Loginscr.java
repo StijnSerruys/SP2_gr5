@@ -6,7 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
+
+import main.Main;
+
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -17,6 +21,7 @@ public class Loginscr implements ActionListener {
 	private JTextField textField_1;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton;
+	private JOptionPane JOptionpane;
 
 	/**
 	 * Launch the application.
@@ -104,9 +109,14 @@ public void actionPerformed(ActionEvent e) {
 		{
 		LoginDAO.getLoginDetails(textField.getText());
 		}
+		else 
+		{
+			JOptionpane.showMessageDialog(null,"Username or password wrong");
+		}
 	}
 	
 }
-	
-	
+
+
 }
+
