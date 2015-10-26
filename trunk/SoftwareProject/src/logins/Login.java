@@ -1,7 +1,7 @@
 package logins;
 
-public class Login  {
-	public Login(int id, String bedrijfsnaam, String paswoord, String hashcode) {
+public class Login extends Loginscr  {
+	public Login(int id, int i, String bedrijfsnaam, String paswoord, String hashcode, String string, int j) {
 		super();
 		this.id = id;
 		this.bedrijfsnaam = bedrijfsnaam;
@@ -10,9 +10,13 @@ public class Login  {
 	}
 	private int id;
 	private String bedrijfsnaam, paswoord, hashcode;
+	private LoginDAO mijnDAO;
+	private Loginscr login = new Loginscr();
 	
+
 	public int getId() {
 		return id;
+		
 	}
 	public void setId(int id) {
 		this.id = id;
