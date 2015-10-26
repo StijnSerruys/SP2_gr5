@@ -10,28 +10,31 @@ public class Connection {
     private static String connectionString = "jdbc:mysql://dt5.ehb.be/SP2_gr5";
     private static java.sql.Connection connection;
     private static Statement command;
-    private static  ResultSet data;
+    private static ResultSet data;
 
-    public static void make_connection(String statement){
+    public static void main(String[] args){
         try {
-            connection = DriverManager.getConnection(connectionString, username, password);
-            command = connection.createStatement();
-            command.execute(statement);
-            //command.execute("DELETE FROM EMPLOYEE WHERE first_name = 's'");
-            System.out.println("Executed.");
-            connection.close();
+            if(connection == null) {
+                connection = DriverManager.getConnection(connectionString, username, password);
+                command = connection.createStatement();
+                //command.execute("INSERT INTO EMPLOYEE VALUES (2, 'S', 'Se', 1500)");
+                data = command.executeQuery("SELECT * FROM EMPLOYEE");
+                //command.execute("DELETE FROM EMPLOYEE WHERE first_name = 's'");
+            }
+            //System.out.println("Connection? " + connection + ", Closed? " + command.isClosed());
         }catch (SQLException e){
-            System.out.println(e);
             e.printStackTrace();
         } finally{
             try {
-                if (data.first()) {
+                if (data != null) {
                     while (data.next()) {
-                        System.out.println("name= " + data.getString(2) + "");
+                        System.out.println("nr= " + data.getString("id") + ", name= " + data.getString("first_name"));
                     }
+                    if (!command.isClosed()) command.closeOnCompletion();
+                    connection.close();
                 }
             }catch(SQLException e){
-                    e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }
