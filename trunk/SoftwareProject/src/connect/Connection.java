@@ -30,8 +30,9 @@ public class Connection {
                     while (data.next()) {
                         System.out.println("nr= " + data.getString("id") + ", name= " + data.getString("first_name"));
                     }
-                    if (!command.isClosed()) command.closeOnCompletion();
-                    connection.close();
+                }
+                if(connection != null){
+                   connection.close();
                 }
             }catch(SQLException e){
                 e.printStackTrace();
