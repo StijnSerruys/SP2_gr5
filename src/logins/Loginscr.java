@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
-import main.Main;
 
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;

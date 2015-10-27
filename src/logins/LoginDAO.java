@@ -1,6 +1,7 @@
 
 
 import java.sql.*;
+import logins.*;
 
 public class LoginDAO {
 
