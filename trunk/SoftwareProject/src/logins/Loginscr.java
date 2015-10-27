@@ -87,7 +87,7 @@ public class Loginscr implements ActionListener {
 		frame.getContentPane().add(lblPassword);
 		
 		
-		
+
 	}
 	
 

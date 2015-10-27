@@ -11,7 +11,7 @@ public class Login extends Loginscr  {
 	}
 	private int id;
 	private String bedrijfsnaam, paswoord, hashcode;
-	private LoginDAO mijnDAO;
+	//private LoginDAO mijnDAO;
 	private Loginscr login = new Loginscr();
 	
 
