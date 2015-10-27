@@ -1,12 +1,13 @@
 package logins;
 
 import java.sql.*;
-import logins.*;
 
 public class LoginDAO {
 
     private static String username = "SP2_gr5";
     private static String password = "9RVU";
+    private static String username1, passw1;
+    private static Login logUserIn;
 
     private static String connectionString = "jdbc:mysql://dt5.ehb.be/SP2_gr5";
     private static java.sql.Connection connection;
@@ -17,9 +18,8 @@ public class LoginDAO {
         try {
             connection = DriverManager.getConnection(connectionString, username, password);
             command = connection.createStatement();
-            command.execute("Select username from users where username ="+username);
-            //command.execute("DELETE FROM EMPLOYEE WHERE first_name = 's'");
-            System.out.println("Executed.");
+            command.executeQuery("Select username from users where username =" + username);
+            System.out.println("getUserName Executed.");
             connection.close();
         }catch (SQLException e){
             System.out.println(e);
@@ -29,24 +29,24 @@ public class LoginDAO {
                 if (data.first()) {
                     while (data.next()) {
                         System.out.println("name= " + data.getString(2) + "");
-                        String username1 = data.getString(1);
+                        username1 = data.getString(1);
                         
                     }
                 }
-                return username;
+
             }catch(SQLException e){
                     e.printStackTrace();
             }
         }
+        return username1;
     }
     
     public static String getWachtwoord(String username){
         try {
             connection = DriverManager.getConnection(connectionString, username, password);
             command = connection.createStatement();
-            command.execute("Select wachtwoord from users where username="+username);
-            //command.execute("DELETE FROM EMPLOYEE WHERE first_name = 's'");
-            System.out.println("Executed.");
+            command.executeQuery("Select wachtwoord from users where username=" + username);
+            System.out.println("getWachtwoord Executed.");
             connection.close();
         }catch (SQLException e){
             System.out.println(e);
@@ -55,22 +55,23 @@ public class LoginDAO {
             try {
                 if (data.first()) {
                     while (data.next()) {
-                      return data.getString(2);
+                        passw1 = data.getString(2);
                     }
                 }
             }catch(SQLException e){
                     e.printStackTrace();
             }
         }
+        return passw1;
     }
     public static Login getLoginDetails(String username)
     {
+
     	try {
             connection = DriverManager.getConnection(connectionString, username, password);
             command = connection.createStatement();
-            command.execute("Select wachtwoord from users where username="+username);
-            //command.execute("DELETE FROM EMPLOYEE WHERE first_name = 's'");
-            System.out.println("Executed.");
+            command.executeQuery("Select wachtwoord from users where username=" + username);
+            System.out.println("getLoginDetails Executed.");
             connection.close();
         }catch (SQLException e){
             System.out.println(e);
@@ -79,7 +80,7 @@ public class LoginDAO {
             try {
                 if (data.first()) {
                     while (data.next()) {
-                      Login logUserIn= new Login(data.getInt(1),
+                      logUserIn = new Login(data.getInt(1),
                     		  data.getInt(2),data.getString(3),data.getString(4),
                     		  data.getString(5),data.getString(6),data.getInt(7));
                     }
@@ -88,10 +89,7 @@ public class LoginDAO {
                     e.printStackTrace();
             }
         }
-    	
-    	
+    	return logUserIn;
     }
-    
-
 }
 
