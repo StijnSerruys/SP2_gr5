@@ -1,5 +1,6 @@
 package connect;
 
+import logins.*;
 import java.sql.*;
 
 public class Connection {
