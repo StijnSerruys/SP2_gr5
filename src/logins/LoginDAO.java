@@ -18,7 +18,7 @@ public class LoginDAO {
         try {
             connection = DriverManager.getConnection(connectionString, username, password);
             command = connection.createStatement();
-            command.executeQuery("Select username from users where username =" + username);
+            data = command.executeQuery("Select username from users where username =" + username);
             System.out.println("getUserName Executed.");
             connection.close();
         }catch (SQLException e){
@@ -45,7 +45,7 @@ public class LoginDAO {
         try {
             connection = DriverManager.getConnection(connectionString, username, password);
             command = connection.createStatement();
-            command.executeQuery("Select wachtwoord from users where username=" + username);
+            data = command.executeQuery("Select wachtwoord from users where username=" + username);
             System.out.println("getWachtwoord Executed.");
             connection.close();
         }catch (SQLException e){
@@ -70,7 +70,7 @@ public class LoginDAO {
     	try {
             connection = DriverManager.getConnection(connectionString, username, password);
             command = connection.createStatement();
-            command.executeQuery("Select wachtwoord from users where username=" + username);
+            data = command.executeQuery("Select wachtwoord from users where username=" + username);
             System.out.println("getLoginDetails Executed.");
             connection.close();
         }catch (SQLException e){

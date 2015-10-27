@@ -14,15 +14,17 @@ public class Connection {
     private static ResultSet data;
 
     public static void main(String[] args){
+        System.out.println("Main connection");
         try {
             if(connection == null) {
                 connection = DriverManager.getConnection(connectionString, username, password);
                 command = connection.createStatement();
-                //command.execute("INSERT INTO EMPLOYEE VALUES (2, 'S', 'Se', 1500)");
-                data = command.executeQuery("SELECT * FROM EMPLOYEE");
-                //command.execute("DELETE FROM EMPLOYEE WHERE first_name = 's'");
+
             }
-            //System.out.println("Connection? " + connection + ", Closed? " + command.isClosed());
+            //command.execute("INSERT INTO EMPLOYEE VALUES (2, 'S', 'Se', 1500)");
+            data = command.executeQuery("SELECT * FROM EMPLOYEE");
+            //command.execute("DELETE FROM EMPLOYEE WHERE first_name = 's'");
+            System.out.println("Connection? " + connection + ", Closed? " + connection.isClosed());
         }catch (SQLException e){
             e.printStackTrace();
         } finally{
