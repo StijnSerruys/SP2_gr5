@@ -1,15 +1,15 @@
-package scores;
+package source;
 
 public class Score {
-	public Score(int id, int quizID, String resultaat) {
+	public Score(int id, int quizID, String result) {
 		super();
 		this.id = id;
 		this.quizID = quizID;
-		this.resultaat = resultaat;
+		this.result = result;
 	}
 	private int id, quizID;
 	/*Array strings voor resultaten ?*/
-	private String resultaat;
+	private String result;
 	public int getId() {
 		return id;
 	}
@@ -22,10 +22,10 @@ public class Score {
 	public void setQuizID(int quizID) {
 		this.quizID = quizID;
 	}
-	public String getResultaat() {
-		return resultaat;
+	public String getResult() {
+		return result;
 	}
-	public void setResultaat(String resultaat) {
-		this.resultaat = resultaat;
+	public void setResult(String result) {
+		this.result = result;
 	}
 }

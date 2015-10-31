@@ -1,4 +1,4 @@
-package connect;
+package dao;
 
 import logins.*;
 import java.sql.*;
@@ -14,7 +14,7 @@ public class Connection {
     private static ResultSet data;
 
     public static void main(String[] args){
-        System.out.println("Main connection");
+        System.out.println("Controller connection");
         try {
             if(connection == null) {
                 connection = DriverManager.getConnection(connectionString, username, password);
@@ -42,5 +42,36 @@ public class Connection {
             }
         }
     }
+
+    public static String executeQueryString(String executeQuery){
+        try {
+            if(connection == null) {
+                connection = DriverManager.getConnection(connectionString, username, password);
+                command = connection.createStatement();
+
+            }
+            data = command.executeQuery(executeQuery);
+            System.out.println("Connection? " + connection + ", Closed? " + connection.isClosed());
+        }catch (SQLException e){
+            e.printStackTrace();
+        } finally{
+            try {
+                if (data != null) {
+                    while (data.next()) {
+                        //System.out.println("nr= " + data.getString(resultColumns[0]) + ", name= " + data.getString(resultColumns[1]));
+                        
+                    }
+                }
+                if(connection != null){
+                    connection.close();
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return executeQuery;
+    }
+
+
 }
 
