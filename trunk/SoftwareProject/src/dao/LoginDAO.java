@@ -4,82 +4,87 @@ import source.Login;
 import java.sql.*;
 
 public class LoginDAO {
-
-    private static String username ="SP2_gr5";
-    private static String password ="9RVU";
-    private static String username1, passw1;
+    private static String username1, password1;
     private static Login logUserIn;
 
-    private static String connectionString = "jdbc:mysql://dt5.ehb.be/SP2_gr5";
     private static java.sql.Connection connection;
     private static Statement command;
-    private static  ResultSet data;
+    private static ResultSet data;
+    private static PreparedStatement stmt = null;
 
     public static String getUserName(String user){
 
         try {
-            data =  Connection.executeQueryString("Select username from user where username =" + user);
-            if(data == null) throw new SQLException("Statement not executed");
-            else  System.out.println("Executed.");
-        }catch (SQLException e){
-            System.out.println(e);
-            e.printStackTrace();
-        } finally{
-            try {
-                if (data.first()) {
-                    while (data.next()) {
-                        System.out.println("name= " + data.getString(2) + "");
-                        username1 = data.getString(1);
-                    }
-                    return user;
-                }
-            }catch(SQLException e){
-                e.printStackTrace();
-            }
+            connection = Connection.getDBConnection();
+            command = connection.createStatement();
+
+            System.out.println("Creating statement...");
+            stmt = connection.prepareStatement("SELECT username FROM user WHERE username = ?");
+            stmt.setString(1, user);
+            data = stmt.executeQuery();
+
+            while(data.next()){
+            System.out.println("getting data");
+            username1=data.getString(1);
         }
-        return username;
+        data.close();
+        stmt.close();
+        connection.close();
+    }catch (SQLException e){
+        e.printStackTrace();
+    }catch(Exception e) {//Handle errors for Class.forName
+        e.printStackTrace();
+    }finally{
+        try{
+            if(stmt!=null)  stmt.close();
+        }catch(SQLException se2){
+            se2.printStackTrace();
+        }
+        try{
+            if(connection!=null) connection.close();
+        }catch(SQLException se){
+            se.printStackTrace();
+        }
+    }
+        return username1;
     }
 
     public static String getWachtwoord(String user){
-        String pass=" ";
         try {
-            connection = DriverManager.getConnection(connectionString, username, password);
+            connection = Connection.getDBConnection();
             command = connection.createStatement();
 
-            command.execute("Select password from user where username='"+user+"';");
-            data=command.getResultSet();
-            //command.execute("DELETE FROM EMPLOYEE WHERE first_name = 's'");
-            System.out.println("Executed.");
+            stmt = connection.prepareStatement("Select password from user where username=?");
+            stmt.setString(1, user);
+            data = stmt.executeQuery();
 
-
+            while(data.next()){
+                System.out.println("getting data");
+                password1=data.getString(1);
+            }
+            data.close();
+            stmt.close();
+            connection.close();
         }catch (SQLException e){
             e.printStackTrace();
-        } finally{
-            try {
-                if (data.first()) {
-
-                    System.out.println("getting data");
-                    pass=data.getString(1);
-                }
-            }catch(SQLException e){
-                e.printStackTrace();
+        }catch(Exception e) {//Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            try{
+                if(stmt!=null)  stmt.close();
+            }catch(SQLException se2){
+                se2.printStackTrace();
+            }
+            try{
+                if(connection!=null) connection.close();
+            }catch(SQLException se){
+                se.printStackTrace();
             }
         }
-        if (connection!=null)
-        {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        return pass;
+        return password1;
     }
 
-
-
-    public static Login getLoginDetails(String user)
+/*    public static Login getLoginDetails(String user)
     {
         try {
             connection = DriverManager.getConnection(connectionString, username, password);
@@ -88,9 +93,7 @@ public class LoginDAO {
             {
                 data=command.getResultSet();
             }
-            //command.execute("DELETE FROM EMPLOYEE WHERE first_name = 's'");
             System.out.println("Executed.");
-
             connection.close();
         }catch (SQLException e){
             System.out.println(e);
@@ -123,7 +126,7 @@ public class LoginDAO {
             }
         }
         return false;
-    }
+    }*/
 }
 
 
