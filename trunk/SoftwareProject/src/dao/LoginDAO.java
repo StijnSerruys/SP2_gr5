@@ -1,4 +1,6 @@
-package logins;
+package dao;
+
+import logins.Login;
 
 import java.sql.*;
 
@@ -12,7 +14,7 @@ public class LoginDAO {
     private static String connectionString = "jdbc:mysql://dt5.ehb.be/SP2_gr5";
     private static java.sql.Connection connection;
     private static Statement command;
-    private static  ResultSet data;
+    private static ResultSet data;
 
     public static String getUserName(String username){
         try {
@@ -41,7 +43,7 @@ public class LoginDAO {
         return username1;
     }
     
-    public static String getWachtwoord(String username){
+   /* public static String getWachtwoord(String username){
         try {
             connection = DriverManager.getConnection(connectionString, username, password);
             command = connection.createStatement();
@@ -59,11 +61,38 @@ public class LoginDAO {
                     }
                 }
             }catch(SQLException e){
-                    e.printStackTrace();
+                e.printStackTrace();
+            }
+        }
+        return passw1;
+    }*/
+
+    public static String getWachtwoord(String username){
+
+        dao.Connection.executeQueryString("Select wachtwoord from users where username=" + username);
+        try {
+            connection = DriverManager.getConnection(connectionString, username, password);
+            command = connection.createStatement();
+            data = command.executeQuery("Select wachtwoord from users where username=" + username);
+            System.out.println("getWachtwoord Executed.");
+            connection.close();
+        }catch (SQLException e){
+            System.out.println(e);
+            e.printStackTrace();
+        } finally{
+            try {
+                if (data.first()) {
+                    while (data.next()) {
+                        passw1 = data.getString(2);
+                    }
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
             }
         }
         return passw1;
     }
+
     public static Login getLoginDetails(String username)
     {
 

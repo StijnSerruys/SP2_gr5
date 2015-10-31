@@ -1,16 +1,16 @@
-package logins;
+package gui;
+
+import dao.LoginDAO;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTextPane;
 
 
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
-import java.awt.*;
 import java.awt.event.*;
 
 public class Loginscr implements ActionListener {
@@ -30,7 +30,7 @@ public class Loginscr implements ActionListener {
 			public void run() {
 				try {
 					Loginscr window = new Loginscr();
-					window.frame.setVisible(true);
+					window.frame.setVisible(true);//NullpoinerExcep ?
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,7 +51,7 @@ public class Loginscr implements ActionListener {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		btnNewButton = new JButton("Login");
 		btnNewButton.setBounds(208, 200, 97, 25);
 		frame.getContentPane().add(btnNewButton);

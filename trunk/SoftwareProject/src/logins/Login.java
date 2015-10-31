@@ -1,7 +1,9 @@
 package logins;
 
 
-public class Login extends Loginscr  {
+import gui.Loginscr;
+
+public class Login extends Loginscr {
 	public Login(int id, int i, String bedrijfsnaam, String paswoord, String hashcode, String string, int j) {
 		super();
 		this.id = id;
