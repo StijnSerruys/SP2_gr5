@@ -2,14 +2,9 @@ package handler;
 
 import gui.Loginscr;
 
-public class Controller {
+public class Controller extends Loginscr{
 
-
-    public static void main(String args[])
-
-    {
-        Loginscr ll1 = new Loginscr();
-        ll1.start();
-
+    public static void main(String[] args) {
+        Loginscr.start();
     }
 }
